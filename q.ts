@@ -80,6 +80,7 @@ const gen_embed = async ({
     }
     if (description) {
         head += `<meta property='og:description' content='${description}' />\n`;
+        body += `<p>${description}</p>\n`;
     }
     if (audio_url) {
         head += `<meta property='og:audio' content='${audio_url}' />\n`;
