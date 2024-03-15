@@ -21,8 +21,10 @@ module.exports = {
   },
 
   // Base config
-  extends: ["eslint:recommended"],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended", "airbnb", "airbnb-typescript"],
 
+  plugins: ["@stylistic"],
   overrides: [
     // React
     {
@@ -133,4 +135,18 @@ module.exports = {
       },
     },
   ],
+
+  rules: {
+    "no-unused-vars": ["error", { argsIgnorePattern: "_" }],
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "_" }],
+    "@stylistic/semi": ["error", "always"],
+    "camelcase": ["off"],
+    "react/jsx-filename-extension": [1,
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ]
+  },
 };
