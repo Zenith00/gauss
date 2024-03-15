@@ -108,7 +108,7 @@ app.get("/dmg", async (req, res) => {
         damage: [dmg],
         damageOnFirstHit: "",
         damageOnMiss: "",
-        attack: hitbonus ? [hitbonus] : [],
+        attack: hitbonus ? [hitbonus] : ["0"],
         attackCount: 1,
         critFaceCount: 0,
         damageFeatures: {
