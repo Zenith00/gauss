@@ -2,7 +2,7 @@ import express from "express";
 import * as MW from "app/modules/damage/mathWorker.js";
 import { getAverageDamage } from "app/modules/damage/mathWorker.js";
 const app = express();
-const PORT = 10025;
+const PORT = 10022;
 
 // async def gen_embed(
 //     title: str = "zeax",
