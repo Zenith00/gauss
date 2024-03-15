@@ -96,7 +96,10 @@ const gen_embed = async ({
 app.get("/dmg", async (req, res) => {
     const ac = req.query.ac?.toString();
     const dmg = req.query.dmg?.toString();
+    const count = req.query.count?.toString();
     const hitbonus = req.query.hitbonus?.toString();
+    const critFaces = req.query.critFaces?.toString();
+    const gwf = req.query.gwf?.toString();
 
     const adv = req.query.adv?.toString();
     if (!ac || !dmg) {
@@ -109,10 +112,10 @@ app.get("/dmg", async (req, res) => {
         damageOnFirstHit: "",
         damageOnMiss: "",
         attack: hitbonus ? [hitbonus] : ["0"],
-        attackCount: 1,
-        critFaceCount: 0,
+        attackCount: count ? parseInt(count) : 1,
+        critFaceCount: critFaces ? parseInt(critFaces) : 1,
         damageFeatures: {
-            greatWeaponFighting: false,
+            greatWeaponFighting: !!gwf,
             elementalAdept: false,
         },
         hitMods: {
@@ -126,8 +129,8 @@ app.get("/dmg", async (req, res) => {
 
     res.send(
         await gen_embed({
-            description: `ac: ${ac}\ndmg:${dmg}\nhitbonus:${hitbonus}\ndmg:${damageResult.averageDamage
-                }\ndmg against ac: ${getAverageDamage(
+            description: `<b>AC:</b> ${ac}\nRaw Damage:${dmg}\nHit Bonus:${hitbonus || 0}\nAverage Base Damage:${damageResult.averageDamage
+                }\nAverage Damage Against AC: ${getAverageDamage(
                     damageResult.hitProbMapByAC,
                     parseInt(ac),
                 )}`,
