@@ -103,7 +103,8 @@ app.get("/dmg", async (req, res) => {
         res.status(400).send("ac and dmg are required");
         return;
     }
-    const damageResult = MW.computeDamageResult({
+
+    const damageArgs = {
         damage: [dmg],
         damageOnFirstHit: "",
         damageOnMiss: "",
@@ -118,9 +119,11 @@ app.get("/dmg", async (req, res) => {
             advantage: adv ? parseInt(adv) : 0,
             lucky: false,
         },
-    });
+    }
 
-    console.log(JSON.stringify(damageResult, null, 2))
+    console.log(JSON.stringify(damageArgs, null, 2))
+    const damageResult = MW.computeDamageResult(damageArgs);
+
     res.send(
         await gen_embed({
             description: `ac: ${ac}\ndmg:${dmg}\nhitbonus:${hitbonus}\ndmg:${damageResult.averageDamage
