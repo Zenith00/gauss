@@ -410,14 +410,15 @@ export const computeHitMap = ({
                 { pmf: critDamagePMF, chance: critProb },
                 { pmf: missDamagePMF, chance: ONE.sub(hitProb) },
             ];
-            const output = jointProbPMFs(jpms);
+            const singleDamage = jointProbPMFs(jpms);
+            const output = addPMFs(numberRange(0, damageInfo.attackCount).map(_ => singleDamage))
             return [ac, output];
         }),
     );
 
 export const getAverageDamage = (damagePMFByAC: Map<AC, PMF>, ac: AC) => {
     const pmf = damagePMFByAC.get(ac)!;
-    return weighted_mean_pmf(pmf)
+    return weighted_mean_pmf(pmf);
 }
 
 export const computeDamageResult = (damageInfo: DamageInfo): DamageResult => {
@@ -429,7 +430,7 @@ export const computeDamageResult = (damageInfo: DamageInfo): DamageResult => {
 
     return {
         hitProbMapByAC: computeHitMap({ hitProbByAC, regularDamagePMF, critDamagePMF, missDamagePMF, damageInfo }),
-        averageDamage: weighted_mean_pmf(regularDamagePMF),
+        averageDamage: weighted_mean_pmf(regularDamagePMF).mul(damageInfo.attackCount),
     };
 };
 
