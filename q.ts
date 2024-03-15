@@ -119,6 +119,8 @@ app.get("/dmg", async (req, res) => {
             lucky: false,
         },
     });
+
+    console.log(JSON.stringify(damageResult, null, 2))
     res.send(
         await gen_embed({
             description: `ac: ${ac}\ndmg:${dmg}\nhitbonus:${hitbonus}\ndmg:${damageResult.averageDamage
