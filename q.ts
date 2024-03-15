@@ -133,7 +133,7 @@ app.get("/dmg", async (req, res) => {
                 }\nAverage Damage Against AC: ${getAverageDamage(
                     damageResult.hitProbMapByAC,
                     parseInt(ac),
-                )}`,
+                ).round(2)}`,
         }),
     );
 });
