@@ -415,6 +415,11 @@ export const computeHitMap = ({
         }),
     );
 
+export const getAverageDamage = (damagePMFByAC: Map<AC, PMF>, ac: AC) => {
+    const pmf = damagePMFByAC.get(ac)!;
+    return weighted_mean_pmf(pmf)
+}
+
 export const computeDamageResult = (damageInfo: DamageInfo): DamageResult => {
     const fullAttackRoll = damageInfo.attack.join("+");
     const hitProbByAC = new Map(ACs.map((ac) => [ac, computeHitProbability(fullAttackRoll, ac, damageInfo.hitMods)]));
