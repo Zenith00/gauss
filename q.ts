@@ -51,6 +51,7 @@ const gen_embed = async ({
     description = "",
     audio_url,
     video_url,
+    body: "",
 }: {
     title?: string;
     og_type?: string;
@@ -60,6 +61,7 @@ const gen_embed = async ({
     description?: string;
     audio_url?: string;
     video_url?: string;
+    body?: string;
 } = {}) => {
     let head = "<head>";
     let body = "<body>";
@@ -81,6 +83,7 @@ const gen_embed = async ({
     if (description) {
         head += `<meta property='og:description' content='${description}' />\n`;
         body += `<p>${description.replaceAll("\n", "<br>")}</p>\n`;
+        body += `<p>${body.replaceAll("\n", "<br>")}</p>\n`;
     }
     if (audio_url) {
         head += `<meta property='og:audio' content='${audio_url}' />\n`;
@@ -94,7 +97,7 @@ const gen_embed = async ({
 };
 
 app.get("/dmg", async (req, res) => {
-    const ac = req.query.ac?.toString();
+    const ac = req.query.ac?.toString() ?? "10";
     const dmg = req.query.dmg?.toString();
     const count = req.query.count?.toString();
     const hitbonus = req.query.hitbonus?.toString();
@@ -102,7 +105,7 @@ app.get("/dmg", async (req, res) => {
     const gwf = req.query.gwf?.toString();
 
     const adv = req.query.adv?.toString();
-    if (!ac || !dmg) {
+    if (!dmg) {
         res.status(400).send("ac and dmg are required");
         return;
     }
@@ -134,6 +137,7 @@ app.get("/dmg", async (req, res) => {
                     damageResult.hitProbMapByAC,
                     parseInt(ac),
                 ).round(2)}`,
+            body: JSON.stringify(damageResult, null, 2),
         }),
     );
 });
