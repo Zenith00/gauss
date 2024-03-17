@@ -130,7 +130,7 @@ app.get("/dmg", async (req, res) => {
         },
     }
 
-    let body_extra = `<script type="text/javascript">
+    let body_extra = `<script type="module">
             const damageArgs = ${JSON.stringify(damageArgs)};
             ${readFileSync("./q.js", "utf-8")}
     </script><table id="tb"></table>`
