@@ -685,6 +685,7 @@
   // q/qClient.ts
   var import_bigfraction = __toESM(require_bigfraction());
   var myWorker = new Worker("/workers/mathWorker.js");
+  myWorker.postMessage(damageArgs);
   myWorker.onmessage = (e) => {
     const damageResult = e.data;
     console.log({ damageResult });

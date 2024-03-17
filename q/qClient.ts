@@ -6,6 +6,7 @@ import Fraction from '../app/lib/bigfraction/bigfraction.js';
 
 
 
+myWorker.postMessage(damageArgs);
 
 myWorker.onmessage = (e) => {
     const damageResult: DamageResult = e.data;
