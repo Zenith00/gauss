@@ -693,9 +693,10 @@
     let atLeast = new import_bigfraction.default(1);
     let atMost = new import_bigfraction.default(0);
     [...damageResult.regularDamagePMF.entries()].forEach(([damage, prob]) => {
-      table += `<tr><td>${damage}</td><td>${prob.toString(100)}</td><td>${atLeast.toString(100)}</td><td>${atMost.toString(100)}</td></tr > `;
-      atLeast = atLeast.sub(prob);
-      atMost = atMost.add(prob);
+      let realProb = new import_bigfraction.default(prob);
+      table += `<tr><td>${damage}</td><td>${realProb.toString(100)}</td><td>${atLeast.toString(100)}</td><td>${atMost.toString(100)}</td></tr > `;
+      atLeast = atLeast.sub(realProb);
+      atMost = atMost.add(realProb);
     });
     table += "</table>";
     document.getElementById("rawDamageContainer").innerHTML = table;
