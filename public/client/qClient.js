@@ -698,7 +698,7 @@
       atMost = atMost.add(prob);
     });
     table += "</table>";
-    document.getElementById("table").replaceWith(table);
+    document.getElementById("rawDamage")?.replaceWith(table);
   };
 })();
 /**

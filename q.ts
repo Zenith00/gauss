@@ -134,7 +134,7 @@ app.get("/dmg", async (req, res) => {
     <script type="module">
             const damageArgs = ${JSON.stringify(damageArgs)};
             ${readFileSync("./public/client/qClient.js", "utf-8")}
-    </script><table id="tb"></table>`
+    </script><table id="rawDamage"></table>`
     res.send(
         await gen_embed({
             description: `<b>AC:</b> ${ac}\n<b>Raw Damage:</b>  ${dmg}\n<b>Hit Bonus:</b>  ${hitbonus || 0})`,
