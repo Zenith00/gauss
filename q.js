@@ -13,7 +13,6 @@ myWorker.onmessage = (e) => {
         atMost = atMost.add(prob);
     });
     table += "</table>";
-
     document.getElementById("table").replaceWith(table)
 }
 
