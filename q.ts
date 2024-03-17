@@ -84,7 +84,7 @@ const gen_embed = async ({
     if (description) {
         head += `<meta property='og:description' content='${description}' />\n`;
         body += `<p>${description.replaceAll("\n", "<br>")}</p>\n`;
-        body += `<p>${body_extra.replaceAll("\n", "<br>")}</p>\n`;
+        body += `${body_extra}\n`;
     }
     if (audio_url) {
         head += `<meta property='og:audio' content='${audio_url}' />\n`;
@@ -132,7 +132,7 @@ app.get("/dmg", async (req, res) => {
         },
     }
 
-    let body_extra = `< script type = "text/javascript" >
+    let body_extra = `<script type="text/javascript">
             const damageArgs = ${JSON.stringify(damageArgs)};
             ${readFileSync("./q.js", "utf-8")}
     </script><table id="tb"></table>`
