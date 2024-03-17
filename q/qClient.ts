@@ -15,7 +15,7 @@ myWorker.onmessage = (e) => {
     let atLeast = new Fraction(1);
     let atMost = new Fraction(0);
     [...damageResult.regularDamagePMF.entries()].forEach(([damage, prob]) => {
-        table += `<tr><td>${damage}</td><td>${prob}</td><td>${atLeast}</td><td>${atMost}</td></tr>`;
+        table += `<tr><td>${damage}</td><td>${prob.round(100)}</td><td>${atLeast.round(100)}</td><td>${atMost.round(100)}</td></tr > `;
         atLeast = atLeast.sub(prob);
         atMost = atMost.add(prob);
     });
