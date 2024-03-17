@@ -130,11 +130,10 @@ app.get("/dmg", async (req, res) => {
         },
     }
 
-    let body_extra = `<script src="/lib/bigfraction.js">console.log(Fraction);</script>
-
+    let body_extra = `
     <script type="module">
             const damageArgs = ${JSON.stringify(damageArgs)};
-            ${readFileSync("./q.js", "utf-8")}
+            ${readFileSync("./public/client/qClient.js", "utf-8")}
     </script><table id="tb"></table>`
     res.send(
         await gen_embed({
