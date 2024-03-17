@@ -1,6 +1,7 @@
 const myWorker = new Worker("/workers/mathWorker.js");
 import * as Fraction from '/lib/bigfraction.js';
 console.log(Fraction);
+console.log(Fraction.exports);
 
 
 myWorker.postMessage(damageArgs);
