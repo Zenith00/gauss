@@ -330,6 +330,7 @@ export const printPMF = (pmf: PMF, name = "") => {
     );
 };
 
+
 export const printPMFRepr = (pmf: PMF) => {
     console.log(`,\nexpected: new Map([\n${[...pmf.entries()].sort(([k1, _v1], [k2, _v2]) => k1 - k2).map(([k, v]) => `[${k}, new Fraction(${v.n},${v.d})]`).join(",\n")}\n])`);
 };

@@ -132,8 +132,8 @@ app.get("/dmg", async (req, res) => {
     let table = "<table><tr><th>Damage</th><th>Chance</th><th>At Least</th><th>At Most</th></tr>";
     let atLeast = MW.ONE;
     let atMost = MW.ZERO;
-    damageResult.regularDamagePMF.forEach((damage, prob) => {
-        table += `<tr><td>${damage}</td><td>${prob}</td><td>${atLeast}</td><td>${atMost}</td></tr>`;
+    [...damageResult.regularDamagePMF.entries()].forEach(([damage, prob]) => {
+        table += `<tr><td>${damage}</td><td>${prob.toString(2)}</td><td>${atLeast.toString(2)}</td><td>${atMost.toString(2)}</td></tr>`;
         atLeast = atLeast.sub(prob);
         atMost = atMost.add(prob);
     });
