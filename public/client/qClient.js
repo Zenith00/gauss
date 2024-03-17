@@ -685,7 +685,6 @@
   // q/qClient.ts
   var import_bigfraction = __toESM(require_bigfraction());
   var myWorker = new Worker("/workers/mathWorker.js");
-  myWorker.postMessage(damageArgs);
   myWorker.onmessage = (e) => {
     const damageResult = e.data;
     console.log({ damageResult });
@@ -693,7 +692,7 @@
     let atLeast = new import_bigfraction.default(1);
     let atMost = new import_bigfraction.default(0);
     [...damageResult.regularDamagePMF.entries()].forEach(([damage, prob]) => {
-      table += `<tr><td>${damage}</td><td>${prob}</td><td>${atLeast}</td><td>${atMost}</td></tr>`;
+      table += `<tr><td>${damage}</td><td>${prob.toString()}</td><td>${atLeast.toString()}</td><td>${atMost}</td></tr>`;
       atLeast = atLeast.sub(prob);
       atMost = atMost.add(prob);
     });
