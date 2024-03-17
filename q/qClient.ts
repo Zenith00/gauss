@@ -19,6 +19,6 @@ myWorker.onmessage = (e) => {
         atMost = atMost.add(prob);
     });
     table += "</table>";
-    document.getElementById("rawDamage")?.replaceWith(table)
+    document.getElementById("rawDamageContainer")!.innerHTML = table;
 }
 
