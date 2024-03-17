@@ -130,8 +130,8 @@ app.get("/dmg", async (req, res) => {
         },
     }
 
-    let body_extra = `<script src="/lib/bigfraction.js"></script>
-    
+    let body_extra = `<script src="/lib/bigfraction.js">console.log(Fraction);</script>
+
     <script type="module">
             const damageArgs = ${JSON.stringify(damageArgs)};
             ${readFileSync("./q.js", "utf-8")}

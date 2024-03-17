@@ -1,6 +1,7 @@
 const myWorker = new Worker("/workers/mathWorker.js");
 console.log(damageArgs);
 
+conso
 
 myWorker.postMessage(damageArgs);
 
