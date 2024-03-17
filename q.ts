@@ -96,6 +96,10 @@ const gen_embed = async ({
     return head + body;
 };
 
+app.get("/mw", async (req, res) => {
+    res.sendFile("./public/workers/mathWorker.js")
+})
+
 app.get("/dmg", async (req, res) => {
     const ac = req.query.ac?.toString() ?? "10";
     const dmg = req.query.dmg?.toString();
@@ -133,7 +137,7 @@ app.get("/dmg", async (req, res) => {
     let atLeast = MW.ONE;
     let atMost = MW.ZERO;
     [...damageResult.regularDamagePMF.entries()].forEach(([damage, prob]) => {
-        table += `<tr><td>${damage}</td><td>${prob}</td><td>${atLeast.toString(100)}</td><td>${atMost}</td></tr>`;
+        table += `<tr><td>${damage}</td><td>${prob}</td><td>${atLeast}</td><td>${atMost}</td></tr>`;
         atLeast = atLeast.sub(prob);
         atMost = atMost.add(prob);
     });
