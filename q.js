@@ -4,6 +4,7 @@ myWorker.postMessage(damageArgs);
 
 myWorker.onmessage = (e) => {
     const damageResult = e.data;
+    console.log({ damageResult })
     let table = "<p>Raw Damage</p><table><tr><th>Damage</th><th>Chance</th><th>At Least</th><th>At Most</th></tr>";
     let atLeast = damageResult.util.ONE;
     let atMost = damageResult.util.ZERO;
