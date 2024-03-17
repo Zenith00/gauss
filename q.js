@@ -1,5 +1,4 @@
 const myWorker = new Worker("/workers/mathWorker.js");
-const Fraction = require("/lib/bigfraction.js")
 console.log(Fraction);
 
 
