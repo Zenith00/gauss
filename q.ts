@@ -97,7 +97,7 @@ const gen_embed = async ({
 };
 
 app.get("/mw", async (req, res) => {
-    res.sendFile("./public/workers/mathWorker.js")
+    res.sendFile("./public/workers/mathWorker.js", { root: __dirname })
 })
 
 app.get("/dmg", async (req, res) => {
