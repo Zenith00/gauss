@@ -131,6 +131,7 @@ export interface DamagerFormulae {
 export interface DamageResult {
     averageDamage: Fraction;
     hitProbMapByAC: Map<AC, PMF>;
+    regularDamagePMF: PMF;
 }
 // eslint-disable-next-line import/prefer-default-export
 export const computeDamageInfo = (damageInfo: DamageInfo) => damageInfo;
@@ -431,6 +432,7 @@ export const computeDamageResult = (damageInfo: DamageInfo): DamageResult => {
     return {
         hitProbMapByAC: computeHitMap({ hitProbByAC, regularDamagePMF, critDamagePMF, missDamagePMF, damageInfo }),
         averageDamage: weighted_mean_pmf(regularDamagePMF).mul(damageInfo.attackCount),
+        regularDamagePMF,
     };
 };
 
