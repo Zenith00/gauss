@@ -1,4 +1,4 @@
-import Fraction from "fraction.js/bigfraction";
+import Fraction from '~/lib/bigfraction/bigfraction.js';
 
 // eslint-disable-next-line import/extensions
 import { DiceRoller } from "~/lib/dice-roller-parser";
