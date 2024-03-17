@@ -1,5 +1,5 @@
 const myWorker = new Worker("/workers/mathWorker.js");
-console.log(Fraction);
+console.log(damageArgs);
 
 
 myWorker.postMessage(damageArgs);
