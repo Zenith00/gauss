@@ -1,6 +1,8 @@
 const myWorker = new Worker("/workers/mathWorker.js");
 const Fraction = import('/lib/bigfraction.js');
 
+console.log(Fraction);
+
 myWorker.postMessage(damageArgs);
 
 myWorker.onmessage = (e) => {
