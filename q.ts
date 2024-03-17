@@ -129,6 +129,16 @@ app.get("/dmg", async (req, res) => {
 
     console.log(JSON.stringify(damageArgs, null, 2))
     const damageResult = MW.computeDamageResult(damageArgs);
+    let table = "<table><tr><th>Damage</th><th>Chance</th><th>At Least</th><th>At Most</th></tr>";
+    let atLeast = MW.ONE;
+    let atMost = MW.ZERO;
+    damageResult.regularDamagePMF.forEach((damage, prob) => {
+        table += `<tr><td>${damage}</td><td>${prob}</td><td>${atLeast}</td><td>${atMost}</td></tr>`;
+        atLeast = atLeast.sub(prob);
+        atMost = atMost.add(prob);
+    });
+
+    table += "</table>";
 
     res.send(
         await gen_embed({
@@ -137,7 +147,7 @@ app.get("/dmg", async (req, res) => {
                     damageResult.hitProbMapByAC,
                     parseInt(ac),
                 ).round(2)}`,
-            body_extra: JSON.stringify(damageResult.regularDamagePMF, null, 2),
+            body_extra: table,
         }),
     );
 });
