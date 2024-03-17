@@ -1,6 +1,7 @@
 import express from "express";
 import * as MW from "app/modules/damage/mathWorker.js";
 import { getAverageDamage } from "app/modules/damage/mathWorker.js";
+import { readFileSync } from "fs";
 const app = express();
 const PORT = 10022;
 
@@ -114,7 +115,7 @@ app.get("/dmg", async (req, res) => {
         return;
     }
 
-    const damageArgs = {
+    const damageArgs: MW.DamageInfo = {
         damage: [dmg],
         damageOnFirstHit: "",
         damageOnMiss: "",
@@ -131,27 +132,14 @@ app.get("/dmg", async (req, res) => {
         },
     }
 
-    console.log(JSON.stringify(damageArgs, null, 2))
-    const damageResult = MW.computeDamageResult(damageArgs);
-    let table = "<p>Raw Damage</p><table><tr><th>Damage</th><th>Chance</th><th>At Least</th><th>At Most</th></tr>";
-    let atLeast = MW.ONE;
-    let atMost = MW.ZERO;
-    [...damageResult.regularDamagePMF.entries()].forEach(([damage, prob]) => {
-        table += `<tr><td>${damage}</td><td>${prob}</td><td>${atLeast}</td><td>${atMost}</td></tr>`;
-        atLeast = atLeast.sub(prob);
-        atMost = atMost.add(prob);
-    });
-
-    table += "</table>";
-
+    let body_extra = `< script type = "text/javascript" >
+            const damageArgs = ${JSON.stringify(damageArgs)};
+            ${readFileSync("./q.js", "utf-8")}
+    </script><table id="tb"></table>`
     res.send(
         await gen_embed({
-            description: `<b>AC:</b> ${ac}\n<b>Raw Damage:</b>  ${dmg}\n<b>Hit Bonus:</b>  ${hitbonus || 0}\n<b>Average Base Damage:</b>  ${damageResult.averageDamage
-                }\nAverage Damage Against AC: ${getAverageDamage(
-                    damageResult.hitProbMapByAC,
-                    parseInt(ac),
-                ).round(2)}`,
-            body_extra: table,
+            description: `<b>AC:</b> ${ac}\n<b>Raw Damage:</b>  ${dmg}\n<b>Hit Bonus:</b>  ${hitbonus || 0})`,
+            body_extra
         }),
     );
 });
