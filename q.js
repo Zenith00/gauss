@@ -1,5 +1,5 @@
 const myWorker = new Worker("/workers/mathWorker.js");
-import Fraction from '/lib/bigfraction.js';
+const Fraction = import('/lib/bigfraction.js');
 
 myWorker.postMessage(damageArgs);
 
