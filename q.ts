@@ -51,7 +51,7 @@ const gen_embed = async ({
     description = "",
     audio_url,
     video_url,
-    body: "",
+    body_extra = "",
 }: {
     title?: string;
     og_type?: string;
@@ -61,7 +61,7 @@ const gen_embed = async ({
     description?: string;
     audio_url?: string;
     video_url?: string;
-    body?: string;
+    body_extra?: string;
 } = {}) => {
     let head = "<head>";
     let body = "<body>";
@@ -83,7 +83,7 @@ const gen_embed = async ({
     if (description) {
         head += `<meta property='og:description' content='${description}' />\n`;
         body += `<p>${description.replaceAll("\n", "<br>")}</p>\n`;
-        body += `<p>${body.replaceAll("\n", "<br>")}</p>\n`;
+        body += `<p>${body_extra.replaceAll("\n", "<br>")}</p>\n`;
     }
     if (audio_url) {
         head += `<meta property='og:audio' content='${audio_url}' />\n`;
