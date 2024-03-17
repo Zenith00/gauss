@@ -142,7 +142,7 @@ app.get("/dmg", async (req, res) => {
 
     res.send(
         await gen_embed({
-            description: `<b>AC:</b> ${ac}\nRaw Damage:${dmg}\nHit Bonus:${hitbonus || 0}\nAverage Base Damage:${damageResult.averageDamage
+            description: `<b>AC:</b> ${ac}\n<b>Raw Damage:</b>  ${dmg}\n<b>Hit Bonus:</b>  ${hitbonus || 0}\n<b>Average Base Damage:</b>  ${damageResult.averageDamage
                 }\nAverage Damage Against AC: ${getAverageDamage(
                     damageResult.hitProbMapByAC,
                     parseInt(ac),
