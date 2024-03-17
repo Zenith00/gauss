@@ -16,9 +16,11 @@ myWorker.onmessage = (e) => {
     let atMost = new Fraction(0);
     [...damageResult.regularDamagePMF.entries()].forEach(([damage, prob]) => {
         let realProb = new Fraction(prob)
+
+        atMost = atMost.add(realProb);
+
         table += `<tr><td>${damage}</td><td>${realProb.toString(100)}</td><td>${atLeast.toString(100)}</td><td>${atMost.toString(100)}</td></tr > `;
         atLeast = atLeast.sub(realProb);
-        atMost = atMost.add(realProb);
     });
     table += "</table>";
     document.getElementById("rawDamageContainer")!.innerHTML = table;
