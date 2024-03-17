@@ -137,7 +137,7 @@ app.get("/dmg", async (req, res) => {
                     damageResult.hitProbMapByAC,
                     parseInt(ac),
                 ).round(2)}`,
-            body: JSON.stringify(damageResult, null, 2),
+            body_extra: JSON.stringify(damageResult, null, 2),
         }),
     );
 });
